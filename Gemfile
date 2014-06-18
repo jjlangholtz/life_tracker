@@ -13,3 +13,5 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'foundation-rails'
 gem 'simple_form'
+gem 'better_errors'
+gem 'binding_of_caller'

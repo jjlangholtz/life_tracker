@@ -17,9 +17,9 @@
         <td><%= school.name %></td>
         <td><%= school.beginning_year %></td>
         <td><%= school.ending_year %></td>
-        <td><%= link_to 'Show', school %></td>
-        <td><%= link_to 'Edit', edit_school_path(school) %></td>
-        <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', person_school_path(school.id, school.person_id) %></td>
+        <td><%= link_to 'Edit', edit_person_school_path(school.id, school.person_id) %></td>
+        <td><%= link_to 'Destroy', person_school_path(school.id, school.person_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New School', new_school_path %>
+<%= link_to 'New School', new_person_school_path %>

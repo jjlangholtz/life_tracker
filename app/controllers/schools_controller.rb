@@ -4,7 +4,7 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all.order(:beginning_year)
+    @schools = School.all
   end
 
   # GET /schools/1

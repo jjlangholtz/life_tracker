@@ -1,17 +1,32 @@
-<h1>Welcome to Life Tracker!</h1>
+<div class='row'>
+  <div class='columns large-12 text-center'>
+    <h1>Welcome to Life Tracker!</h1>
+  </div>
+</div>
 
-<h2>Recent Schools</h2>
-<% @schools.order(:created_at).limit(5).each do |school| %>
-  <p><%= school.person.name %> just added <%= school.name %> to his list of schools!</p>
-  <p><%= school.created_at %></p>
-<% end %>
+<div class='row'>
+  <div class='columns large-6'>
+    <h2>Recent Schools</h2>
+    <% @schools.order(:created_at).limit(5).each do |school| %>
+      <p><%= school.person.name %> just added <%= school.name %> to his list of schools!</p>
+      <p><%= school.created_at %></p>
+    <% end %>
+  </div>
 
-<h2>Recent Life Events</h2>
-<% @events.order(:created_at).limit(5).each do |event| %>
-  <p><%= event.person.name %> just added <%= event.title %> to his list of schools!</p>
-  <p><%= event.created_at %></p>
-<% end %>
+  <div class='columns large-6'>
+    <h2>Recent Life Events</h2>
+    <% @events.order(:created_at).limit(5).each do |event| %>
+      <p><%= event.person.name %> just added <%= event.title %> to his list of schools!</p>
+      <p><%= event.created_at %></p>
+    <% end %>
+  </div>
+</div>
 
-<p>View your schools <%= link_to 'here', schools_path %>.</p>
-
-<p>View your life events <%= link_to 'here', life_events_path %>.</p>
+<div class='row text-center'>
+  <h2 class='text-center'>The People on Life Tracker</h2>
+  <% @people.each do |person| %>
+      <%= link_to person.name, person_path(person) %></br>
+      <%= link_to 'Schools', person_schools_path(person) %>
+      <%= link_to 'Life Events', person_life_events_path(person) %></br>
+  <% end %>
+</div>
