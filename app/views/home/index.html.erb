@@ -1,5 +1,17 @@
 <h1>Welcome to Life Tracker!</h1>
 
+<h2>Recent Schools</h2>
+<% @schools.order(:created_at).limit(5).each do |school| %>
+  <p><%= school.person.name %> just added <%= school.name %> to his list of schools!</p>
+  <p><%= school.created_at %></p>
+<% end %>
+
+<h2>Recent Life Events</h2>
+<% @events.order(:created_at).limit(5).each do |event| %>
+  <p><%= event.person.name %> just added <%= event.title %> to his list of schools!</p>
+  <p><%= event.created_at %></p>
+<% end %>
+
 <p>View your schools <%= link_to 'here', schools_path %>.</p>
 
 <p>View your life events <%= link_to 'here', life_events_path %>.</p>
