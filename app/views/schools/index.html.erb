@@ -13,6 +13,7 @@
   <tbody>
     <% @schools.each do |school| %>
       <tr>
+        <td><%= school.person.name %></td>
         <td><%= school.name %></td>
         <td><%= school.beginning_year %></td>
         <td><%= school.ending_year %></td>

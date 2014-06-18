@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get 'people/:id' => 'people#show'
   resources :life_events
   resources :schools
 

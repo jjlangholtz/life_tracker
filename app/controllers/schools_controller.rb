@@ -4,7 +4,7 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+    @schools = School.all.order(:beginning_year)
   end
 
   # GET /schools/1
@@ -69,6 +69,6 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
-      params.require(:school).permit(:name, :beginning_year, :ending_year)
+      params.require(:school).permit(:name, :beginning_year, :ending_year, :person_id)
     end
 end
