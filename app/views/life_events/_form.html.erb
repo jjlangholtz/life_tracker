@@ -1,4 +1,4 @@
-<%= form_for(@life_event) do |f| %>
+<%= form_for [@person, @life_event], url: person_life_events_path do |f| %>
   <% if @life_event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@life_event.errors.count, "error") %> prohibited this life_event from being saved:</h2>
@@ -11,10 +11,6 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :person_id, 'Person' %><br>
-    <%= f.collection_select :person_id, Person.all, :id, :name %>
-  </div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>

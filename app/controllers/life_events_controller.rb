@@ -1,34 +1,21 @@
 class LifeEventsController < ApplicationController
-  before_action :set_life_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_life_event, only: [:edit, :update, :destroy]
 
-  # GET /life_events
-  # GET /life_events.json
-  def index
-    @life_events = LifeEvent.all.order(:year)
-  end
-
-  # GET /life_events/1
-  # GET /life_events/1.json
-  def show
-  end
-
-  # GET /life_events/new
   def new
     @life_event = LifeEvent.new
   end
 
-  # GET /life_events/1/edit
   def edit
   end
 
-  # POST /life_events
-  # POST /life_events.json
   def create
     @life_event = LifeEvent.new(life_event_params)
+    @person = Person.find(params[:person_id])
+    @life_event.person = @person
 
     respond_to do |format|
       if @life_event.save
-        format.html { redirect_to @life_event, notice: 'Life event was successfully created.' }
+        format.html { redirect_to person_path(@person), notice: 'Life event was successfully created.' }
         format.json { render :show, status: :created, location: @life_event }
       else
         format.html { render :new }
@@ -37,8 +24,6 @@ class LifeEventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /life_events/1
-  # PATCH/PUT /life_events/1.json
   def update
     respond_to do |format|
       if @life_event.update(life_event_params)
@@ -51,8 +36,6 @@ class LifeEventsController < ApplicationController
     end
   end
 
-  # DELETE /life_events/1
-  # DELETE /life_events/1.json
   def destroy
     @life_event.destroy
     respond_to do |format|
@@ -62,12 +45,10 @@ class LifeEventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_life_event
       @life_event = LifeEvent.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def life_event_params
       params.require(:life_event).permit(:title, :year, :description, :person_id)
     end

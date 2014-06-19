@@ -1,34 +1,21 @@
 class SchoolsController < ApplicationController
-  before_action :set_school, only: [:show, :edit, :update, :destroy]
+  before_action :set_school, only: [:edit, :update, :destroy]
 
-  # GET /schools
-  # GET /schools.json
-  def index
-    @schools = School.all
-  end
-
-  # GET /schools/1
-  # GET /schools/1.json
-  def show
-  end
-
-  # GET /schools/new
   def new
     @school = School.new
   end
 
-  # GET /schools/1/edit
   def edit
   end
 
-  # POST /schools
-  # POST /schools.json
   def create
     @school = School.new(school_params)
+    @person = Person.find(params[:person_id])
+    @school.person = @person
 
     respond_to do |format|
       if @school.save
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
+        format.html { redirect_to person_path(@person), notice: 'School was successfully created.' }
         format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
@@ -37,12 +24,10 @@ class SchoolsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /schools/1
-  # PATCH/PUT /schools/1.json
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
+        format.html { redirect_to person_path(@person.id), notice: 'School was successfully updated.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -51,8 +36,6 @@ class SchoolsController < ApplicationController
     end
   end
 
-  # DELETE /schools/1
-  # DELETE /schools/1.json
   def destroy
     @school.destroy
     respond_to do |format|
@@ -62,12 +45,10 @@ class SchoolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_school
       @school = School.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
       params.require(:school).permit(:name, :beginning_year, :ending_year, :person_id)
     end

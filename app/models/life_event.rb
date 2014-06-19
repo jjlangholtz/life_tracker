@@ -5,4 +5,6 @@ class LifeEvent < ActiveRecord::Base
                           length: { maximum: 140 }
 
   belongs_to :person
+
+  has_many :comments, as: :commentable
 end

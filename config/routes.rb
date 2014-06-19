@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :people do
-    resources :life_events
-    resources :schools
+  resources :people, only: [:show, :new, :create] do
+    resources :life_events, only: [:new, :create, :edit, :update, :destroy]
+    resources :schools, only: [:new, :create, :edit, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

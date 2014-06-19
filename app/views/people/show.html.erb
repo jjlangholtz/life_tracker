@@ -7,3 +7,6 @@
 <% @person.life_events.order(:year).each do |event| %>
   <p><%= event.title %> <%= event.year %></p>
 <% end %>
+
+<%= link_to 'Add School', new_person_school_path(@person) %>
+<%= link_to 'Add Life Event', new_person_life_event_path(@person) %>
