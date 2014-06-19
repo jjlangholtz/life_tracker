@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @schools = School.all.order(:created_at)
-    @events = LifeEvent.all.order(:created_at)
-    @feed = @schools + @events
+    @schools = School.all
+    @events = LifeEvent.all
     @people = Person.all
+    @feed = @schools + @events + @people
   end
 end

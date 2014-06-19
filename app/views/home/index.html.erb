@@ -8,12 +8,14 @@
   <div class='columns large-8 text-center'>
     <div class='row'>
       <div class='columns large-8'>
-        <h2>The Life Feed</h2>
-        <% @feed.each do |feed| %>
+        <h2><%= fa_icon 'reorder' %>    The Feed</h2>
+        <% @feed.sort_by(&:created_at).reverse.each do |feed| %>
           <% if feed.class == School  %>
-            <p><%= feed.person.name %> just added <%= feed.name %> on <%= feed.created_at.to_formatted_s(:short)%></p>
+            <p><%= link_to feed.person.name, person_path(feed.person) %> added <%= feed.name %> on <%= feed.created_at.to_formatted_s(:short) %></p>
+          <% elsif feed.class == LifeEvent %>
+            <p><%= link_to feed.person.name, person_path(feed.person) %> added <%= feed.title %> on <%= feed.created_at.to_formatted_s(:short) %></p>
           <% else %>
-            <p><%= feed.person.name %> just added <%= feed.title %> on <%= feed.created_at.to_formatted_s(:short) %></p>
+            <p><%= link_to feed.name, person_path(feed) %> was added to Life Tracker on <%= feed.created_at.to_formatted_s(:short) %></p>
           <% end %>
         <% end %>
       </div>
@@ -21,10 +23,12 @@
   </div>
 
   <div class='columns large-4 text-center'>
-    <h2>The People</h2>
+    <h2><%= fa_icon 'group' %>    The People</h2>
     <% @people.each do |person| %>
-        <%= link_to person.name, person_path(person) %></br>
+      <h6><%= link_to person.name, person_path(person) %></h6></br>
     <% end %>
     <h4><%= link_to 'Add Person', new_person_path %></h4>
   </div>
 </div>
+
+

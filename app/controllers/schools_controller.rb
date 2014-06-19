@@ -27,7 +27,7 @@ class SchoolsController < ApplicationController
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to person_path(@person.id), notice: 'School was successfully updated.' }
+        format.html { redirect_to person_path(@person), notice: 'School was successfully updated.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -47,6 +47,8 @@ class SchoolsController < ApplicationController
   private
     def set_school
       @school = School.find(params[:id])
+      @person = Person.find(params[:person_id])
+      @school.person = @person
     end
 
     def school_params

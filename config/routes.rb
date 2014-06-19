@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :people, only: [:show, :new, :create] do
-    resources :life_events, only: [:new, :create, :edit, :update, :destroy]
-    resources :schools, only: [:new, :create, :edit, :update, :destroy]
+    resources :life_events, except: [:show, :index]
+    resources :schools, except: [:show, :index]
   end
+
+  resources :comments, only: [:new, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
